@@ -106,7 +106,9 @@ async function executeActiveTool() {
     const output = Array.isArray(result) && result[0] ? result[0].result : null;
 
     if (output === null || output === undefined || output === "") {
-      setStatus("Completed. No output returned.", "ok");
+      const isProcessorLogExtractor =
+        state.activeTool.id === "log-extractor" && payload.mode === "processor";
+      setStatus(isProcessorLogExtractor ? "No logs for your request" : "Completed. No output returned.", "ok");
       return;
     }
 

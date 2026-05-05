@@ -39,6 +39,8 @@
         height: 480px;
         display: grid;
         grid-template-columns: 60px 1fr;
+        position: relative;
+        z-index: 1;
       }
 
       .sidebar {
@@ -159,10 +161,29 @@
         font-size: 10px;
         color: #6f7fa7;
         pointer-events: none;
+        z-index: 1;
+      }
+
+      .watermark {
+        position: absolute;
+        right: -26px;
+        bottom: 18px;
+        width: 210px;
+        height: 210px;
+        background-image: url("assets/logo-white.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        opacity: 0.06;
+        transform: rotate(-14deg);
+        pointer-events: none;
+        user-select: none;
+        z-index: 0;
       }
     </style>
   </head>
   <body>
+    <div class="watermark" aria-hidden="true"></div>
     <div class="layout">
       <aside id="sidebar" class="sidebar"></aside>
       <main class="main">
