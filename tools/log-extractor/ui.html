@@ -44,27 +44,44 @@
 <form class="tool-form">
   <label>
     Mode
-    <select name="mode" required>
+    <select name="mode" id="modeSelect" required>
       <option value="merchant">Merchant logs</option>
       <option value="processor">Processor logs</option>
     </select>
   </label>
 
-  <label>
+  <label id="processorNameField">
     Processor name (optional)
     <input name="processorName" type="text" placeholder="e.g. checkout.com" />
   </label>
 
-  <label>
+  <label id="gateIdField">
     Gate ID (optional)
     <input name="gateId" type="text" placeholder="e.g. 12345" />
   </label>
 
-  <label style="display:flex; align-items:center; gap:8px; color:#c8d4f2;">
-    <input type="checkbox" data-download-output="true" checked />
-    Download output as .txt
+  <label>
+    File name
+    <input name="fileName" type="text" placeholder="e.g. merchant-logs" required />
   </label>
 
   <button type="submit" data-default-action="true">Extract Logs</button>
   <p class="tool-note">The tool scrolls the full log page first, then extracts matching blocks.</p>
 </form>
+
+<script>
+  (function () {
+    const modeSelect = document.getElementById("modeSelect");
+    const processorNameField = document.getElementById("processorNameField");
+    const gateIdField = document.getElementById("gateIdField");
+
+    function syncModeFields() {
+      const isProcessorMode = modeSelect.value === "processor";
+      processorNameField.style.display = isProcessorMode ? "grid" : "none";
+      gateIdField.style.display = isProcessorMode ? "grid" : "none";
+    }
+
+    modeSelect.addEventListener("change", syncModeFields);
+    syncModeFields();
+  })();
+</script>

@@ -48,6 +48,13 @@ function getFormData(formElement) {
   return Object.fromEntries(raw.entries());
 }
 
+function normalizeFilename(name, fallback) {
+  const trimmed = (name || "").trim();
+  const base = trimmed || fallback;
+  const cleaned = base.replace(/[<>:"/\\|?*\x00-\x1F]/g, "_");
+  return cleaned.toLowerCase().endsWith(".txt") ? cleaned : `${cleaned}.txt`;
+}
+
 function runInjectedToolSource(source, params, tabId) {
   return chrome.scripting.executeScript({
     target: { tabId },
@@ -91,6 +98,8 @@ async function executeActiveTool() {
     setStatus("Running tool...", "info");
 
     const payload = getFormData(form);
+    const requestedFileName = payload.fileName;
+    delete payload.fileName;
     const scriptUrl = absoluteToolUrl(state.activeTool.script);
     const toolSource = await fetchText(scriptUrl);
     const result = await runInjectedToolSource(toolSource, payload, tab.id);
@@ -102,17 +111,13 @@ async function executeActiveTool() {
     }
 
     if (typeof output === "string") {
-      const suggestedFile = `${state.activeTool.id}-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-")}.txt`;
-      const confirmed = form.querySelector("[data-download-output='true']");
-      if (confirmed) {
-        const blob = new Blob([output], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-        await chrome.downloads.download({ url, filename: suggestedFile, saveAs: true });
-        URL.revokeObjectURL(url);
-        setStatus(`Completed. Output downloaded as ${suggestedFile}.`, "ok");
-      } else {
-        setStatus(`Completed. Output length: ${output.length} chars.`, "ok");
-      }
+      const fallbackName = `${state.activeTool.id}-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-")}`;
+      const suggestedFile = normalizeFilename(requestedFileName, fallbackName);
+      const blob = new Blob([output], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      await chrome.downloads.download({ url, filename: suggestedFile, saveAs: true });
+      URL.revokeObjectURL(url);
+      setStatus(`Completed. Output downloaded as ${suggestedFile}.`, "ok");
       return;
     }
 
