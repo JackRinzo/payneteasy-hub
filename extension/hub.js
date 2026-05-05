@@ -145,6 +145,24 @@ function wireToolUiActions() {
   }
 }
 
+function wireToolSpecificBehavior(tool) {
+  if (tool.id !== "log-extractor") return;
+
+  const modeSelect = toolContainerEl.querySelector("#modeSelect");
+  const processorNameField = toolContainerEl.querySelector("#processorNameField");
+  const gateIdField = toolContainerEl.querySelector("#gateIdField");
+  if (!modeSelect || !processorNameField || !gateIdField) return;
+
+  const syncModeFields = () => {
+    const isProcessorMode = modeSelect.value === "processor";
+    processorNameField.style.display = isProcessorMode ? "grid" : "none";
+    gateIdField.style.display = isProcessorMode ? "grid" : "none";
+  };
+
+  modeSelect.addEventListener("change", syncModeFields);
+  syncModeFields();
+}
+
 async function renderTool(tool) {
   state.activeTool = tool;
   toolHeaderEl.innerHTML = `
@@ -156,6 +174,7 @@ async function renderTool(tool) {
     toolContainerEl.classList.remove("loading");
     toolContainerEl.innerHTML = await fetchText(absoluteToolUrl(tool.ui));
     wireToolUiActions();
+    wireToolSpecificBehavior(tool);
     setStatus(`Loaded ${tool.name}.`, "info");
   } catch (error) {
     toolContainerEl.innerHTML = `<div style="color:#fda4af;">Failed to load tool UI: ${error.message}</div>`;

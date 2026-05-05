@@ -69,19 +69,3 @@
   <p class="tool-note">The tool scrolls the full log page first, then extracts matching blocks.</p>
 </form>
 
-<script>
-  (function () {
-    const modeSelect = document.getElementById("modeSelect");
-    const processorNameField = document.getElementById("processorNameField");
-    const gateIdField = document.getElementById("gateIdField");
-
-    function syncModeFields() {
-      const isProcessorMode = modeSelect.value === "processor";
-      processorNameField.style.display = isProcessorMode ? "grid" : "none";
-      gateIdField.style.display = isProcessorMode ? "grid" : "none";
-    }
-
-    modeSelect.addEventListener("change", syncModeFields);
-    syncModeFields();
-  })();
-</script>
