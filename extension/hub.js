@@ -1,4 +1,4 @@
-const REGISTRY_URL = "https://YOUR_GITHUB_USERNAME.github.io/payneteasy-hub/tools/index.json";
+const REGISTRY_URL = "https://jackrinzo.github.io/payneteasy-hub/tools/index.json";
 
 const state = {
   tools: [],
