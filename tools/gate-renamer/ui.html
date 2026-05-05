@@ -9,14 +9,14 @@
     display: grid;
     gap: 4px;
     font-size: 12px;
-    color: #c8d4f2;
+    color: #184374;
   }
 
   .tool-form input,
   .tool-form select {
-    background: #0f1628;
-    border: 1px solid #324572;
-    color: #e8eefc;
+    background: #f8fbff;
+    border: 1px solid #bfd8fb;
+    color: #173d6d;
     border-radius: 7px;
     padding: 7px 9px;
     font-size: 12px;
@@ -24,18 +24,30 @@
 
   .tool-form button {
     justify-self: start;
-    border: 1px solid #4b6cb1;
-    background: #26406c;
-    color: #e8eefc;
+    border: 1px solid #3b78d9;
+    background: linear-gradient(180deg, #4f90ef 0%, #3e7fe0 100%);
+    color: #ffffff;
     border-radius: 7px;
-    padding: 7px 11px;
+    padding: 7px 12px;
     cursor: pointer;
     font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(49, 111, 209, 0.26);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  }
+
+  .tool-form button:hover {
+    filter: brightness(1.03);
+    box-shadow: 0 6px 12px rgba(49, 111, 209, 0.34);
+  }
+
+  .tool-form button:active {
+    transform: translateY(1px);
   }
 
   .tool-note {
     margin: 0;
-    color: #9eb0d8;
+    color: #5c7eaa;
     font-size: 11px;
     line-height: 1.2;
   }

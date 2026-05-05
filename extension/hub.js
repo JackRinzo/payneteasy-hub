@@ -10,7 +10,6 @@ const sidebarEl = document.getElementById("sidebar");
 const toolHeaderEl = document.getElementById("toolHeader");
 const toolContainerEl = document.getElementById("toolContainer");
 const statusEl = document.getElementById("status");
-const targetBadgeEl = document.getElementById("targetBadge");
 
 function setStatus(message, type = "info") {
   statusEl.className = `status ${type}`;
@@ -21,13 +20,11 @@ async function findTargetTab() {
   const tabs = await chrome.tabs.query({ url: ["https://*.payneteasy.eu/*"] });
   if (!tabs.length) {
     state.activePaynetEasyTab = null;
-    targetBadgeEl.textContent = "Target tab: not found";
     return null;
   }
 
   const newest = [...tabs].sort((a, b) => (b.lastAccessed || 0) - (a.lastAccessed || 0))[0];
   state.activePaynetEasyTab = newest;
-  targetBadgeEl.textContent = `Target tab: ${newest.title || newest.url}`;
   return newest;
 }
 
@@ -169,7 +166,7 @@ async function renderTool(tool) {
   state.activeTool = tool;
   toolHeaderEl.innerHTML = `
     <h2 style="margin: 0 0 4px; font-size: 14px;">${tool.icon || "🧩"} ${tool.name}</h2>
-    <div style="color: #a9b7d7; font-size: 12px; margin-bottom: 8px; line-height: 1.2;">${tool.description || ""}</div>
+    <div style="color: #5f7ea7; font-size: 12px; margin-bottom: 8px; line-height: 1.2;">${tool.description || ""}</div>
   `;
 
   try {

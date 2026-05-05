@@ -6,17 +6,17 @@
     <title>PaynetEasy Support Hub</title>
     <style>
       :root {
-        color-scheme: dark;
-        --bg-main: #0e1422;
-        --bg-panel: #141d31;
-        --bg-elevated: #1c2740;
-        --bg-active: #26365a;
-        --text-main: #e8eefc;
-        --text-muted: #a9b7d7;
-        --ok: #86efac;
-        --error: #fda4af;
-        --accent: #60a5fa;
-        --border: #2b3b62;
+        color-scheme: light;
+        --bg-main: #f2f7ff;
+        --bg-panel: #ffffff;
+        --bg-elevated: #edf4ff;
+        --bg-active: #dbeaff;
+        --text-main: #0f2a52;
+        --text-muted: #5f7ea7;
+        --ok: #197a46;
+        --error: #b8374d;
+        --accent: #2f6fda;
+        --border: #c8dcfb;
       }
 
       * {
@@ -29,14 +29,14 @@
         font-family: "Segoe UI", Arial, sans-serif;
         background: var(--bg-main);
         color: var(--text-main);
-        width: 360px;
-        height: 480px;
+        width: 400px;
+        height: 455px;
         overflow: hidden;
       }
 
       .layout {
-        width: 360px;
-        height: 480px;
+        width: 400px;
+        height: 455px;
         display: grid;
         grid-template-columns: 60px 1fr;
         position: relative;
@@ -45,7 +45,7 @@
 
       .sidebar {
         border-right: 1px solid var(--border);
-        background: var(--bg-panel);
+        background: linear-gradient(180deg, #eff5ff 0%, #e8f1ff 100%);
         padding: 8px 6px;
         display: flex;
         flex-direction: column;
@@ -54,7 +54,7 @@
 
       .tool-tab {
         border: 1px solid var(--border);
-        background: transparent;
+        background: #f6faff;
         color: var(--text-main);
         border-radius: 8px;
         padding: 8px 4px;
@@ -67,12 +67,13 @@
       }
 
       .tool-tab:hover {
-        background: var(--bg-elevated);
+        background: #e8f1ff;
       }
 
       .tool-tab.active {
-        background: var(--bg-active);
-        border-color: #3d5690;
+        background: linear-gradient(180deg, #dceafe 0%, #d5e6ff 100%);
+        border-color: #91b7f5;
+        box-shadow: 0 0 0 1px rgba(47, 111, 218, 0.18);
       }
 
       .tool-icon {
@@ -88,14 +89,29 @@
       .topline {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 8px;
+        justify-content: flex-start;
         margin-bottom: 8px;
       }
 
-      .title {
-        margin: 0;
-        font-size: 13px;
+      .brand-logo-shell {
+        height: 40px;
+        padding: 4px 10px;
+        border: 1px solid #6f94cb;
+        border-radius: 9px;
+        background: linear-gradient(180deg, #2e4f80 0%, #23436f 100%);
+        box-shadow: 0 6px 14px rgba(32, 69, 122, 0.22);
+        display: flex;
+        align-items: center;
+      }
+
+      .brand-logo {
+        width: 225px;
+        height: 30px;
+        background-image: url("assets/logo-white.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: left center;
+        opacity: 1;
       }
 
       .subtitle {
@@ -110,6 +126,40 @@
         border: 1px solid var(--border);
         border-radius: 10px;
         padding: 8px;
+        box-shadow: 0 8px 20px rgba(30, 89, 176, 0.08);
+      }
+
+      #toolHeader h2 {
+        color: #0f3870;
+      }
+
+      #toolHeader div {
+        color: #4f6f99;
+      }
+
+      #toolContainer .tool-form label {
+        color: #2a558d !important;
+      }
+
+      #toolContainer .tool-form input,
+      #toolContainer .tool-form select {
+        background: #edf4ff !important;
+        color: #0f2f5f !important;
+        border: 1px solid #9fc0ef !important;
+      }
+
+      #toolContainer .tool-form input::placeholder {
+        color: #6286b6 !important;
+      }
+
+      #toolContainer .tool-form button {
+        border: 1px solid #2f69c8 !important;
+        background: linear-gradient(180deg, #3f82e6 0%, #2f6fd2 100%) !important;
+        color: #ffffff !important;
+      }
+
+      #toolContainer .tool-note {
+        color: #5d7ea9 !important;
       }
 
       .status {
@@ -136,18 +186,6 @@
         color: var(--text-muted);
       }
 
-      .badge {
-        font-size: 11px;
-        color: var(--text-muted);
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        padding: 4px 8px;
-        max-width: 148px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
       .loading {
         color: var(--text-muted);
       }
@@ -159,7 +197,7 @@
         width: 100%;
         text-align: center;
         font-size: 10px;
-        color: #6f7fa7;
+        color: #7b95bc;
         pointer-events: none;
         z-index: 1;
       }
@@ -167,7 +205,7 @@
       .watermark {
         position: absolute;
         right: -26px;
-        bottom: 18px;
+        bottom: 12px;
         width: 210px;
         height: 210px;
         background-image: url("assets/logo-white.svg");
@@ -188,11 +226,9 @@
       <aside id="sidebar" class="sidebar"></aside>
       <main class="main">
         <div class="topline">
-          <div>
-            <h1 class="title">PaynetEasy Support Hub</h1>
-            <p class="subtitle">Thin shell extension. Tools are loaded from GitHub Pages on every open.</p>
+          <div class="brand-logo-shell">
+            <div class="brand-logo" aria-label="PaynetEasy"></div>
           </div>
-          <div class="badge" id="targetBadge">Target tab: resolving...</div>
         </div>
         <section class="panel">
           <div id="toolHeader"></div>
