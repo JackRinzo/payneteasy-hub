@@ -143,8 +143,8 @@ function wireToolUiActions() {
 async function renderTool(tool) {
   state.activeTool = tool;
   toolHeaderEl.innerHTML = `
-    <h2 style="margin: 0 0 6px; font-size: 18px;">${tool.icon || "🧩"} ${tool.name}</h2>
-    <div style="color: #a9b7d7; font-size: 13px; margin-bottom: 12px;">${tool.description || ""}</div>
+    <h2 style="margin: 0 0 4px; font-size: 14px;">${tool.icon || "🧩"} ${tool.name}</h2>
+    <div style="color: #a9b7d7; font-size: 12px; margin-bottom: 8px; line-height: 1.2;">${tool.description || ""}</div>
   `;
 
   try {
