@@ -1,0 +1,10 @@
+{
+  "id": "log-extractor",
+  "name": "Log Extractor",
+  "description": "Extract merchant and processor logs as text output.",
+  "params": [
+    { "key": "mode", "type": "string", "required": true, "label": "merchant | processor" },
+    { "key": "processorName", "type": "string", "required": false, "label": "Processor filter (processor mode)" },
+    { "key": "gateId", "type": "string", "required": false, "label": "Gate id filter (processor mode)" }
+  ]
+}

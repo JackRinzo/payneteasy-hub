@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "tools": [
+    {
+      "id": "gate-renamer",
+      "name": "Gate Renamer",
+      "icon": "✏️",
+      "description": "Rename gates inside Clone Project modal",
+      "script": "gate-renamer/tool.js",
+      "ui": "gate-renamer/ui.html"
+    },
+    {
+      "id": "log-extractor",
+      "name": "Log Extractor",
+      "icon": "📋",
+      "description": "Extract merchant and processor logs as .txt",
+      "script": "log-extractor/tool.js",
+      "ui": "log-extractor/ui.html"
+    }
+  ]
+}

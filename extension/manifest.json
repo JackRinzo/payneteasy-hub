@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "PaynetEasy Support Hub",
+  "description": "Thin shell extension that loads support tools dynamically from GitHub Pages.",
+  "version": "1.0.0",
+  "permissions": ["scripting", "activeTab", "downloads", "tabs"],
+  "host_permissions": [
+    "https://*.payneteasy.eu/*",
+    "https://*.github.io/*"
+  ],
+  "action": {
+    "default_title": "Open PaynetEasy Support Hub",
+    "default_popup": "popup.html"
+  }
+}
