@@ -10,6 +10,6 @@
   ],
   "action": {
     "default_title": "Open PaynetEasy Support Hub",
-    "default_popup": "popup.html"
+    "default_popup": "hub.html"
   }
 }
