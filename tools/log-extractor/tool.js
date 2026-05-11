@@ -16,17 +16,24 @@ async function run({ mode, processorName, gateId }) {
   let output = "";
 
   if (mode === "merchant") {
-    const pattern =
+    const logBlockStart =
       /request_data|response_data|NOTIFICATION_START|NOTIFICATION_OK|NOTIFICATION_ERROR|REDIRECTED_TO_MERCHANT/i;
+    const timestampLine = /^\d{4}-\d{2}-\d{2}/;
+    const uiNoise =
+      /^(declined|sale|Current status|Balance:|Initial amount:|Last change|Currency conv|Exchange rate|Effective rate|Memos|Order actions|Chargeback|Mark as fraud|Query status|Change transaction|Rollback|Enable partial|Callbacks|Documents|\d+\.\d{2}\s+[A-Z]{3}|[\d\.-]+)$/i;
     let collecting = false;
     for (const line of lines) {
-      if (pattern.test(line)) {
+      const trimmed = line.trim();
+      if (logBlockStart.test(line)) {
         collecting = true;
-        output += `\n${line}\n`;
+        if (!uiNoise.test(trimmed)) output += `\n${line}\n`;
         continue;
       }
-      if (collecting && /^\d{4}-\d{2}-\d{2}/.test(line)) collecting = false;
-      if (collecting) output += `${line}\n`;
+      if (collecting && timestampLine.test(line) && !logBlockStart.test(line)) {
+        collecting = false;
+        continue;
+      }
+      if (collecting && !uiNoise.test(trimmed)) output += `${line}\n`;
     }
   } else {
     const normalizedProcessor = (processorName || "").trim().toLowerCase();
