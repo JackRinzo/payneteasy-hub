@@ -55,8 +55,13 @@
 
 <form class="tool-form">
   <label>
-    New first word
-    <input name="word" type="text" placeholder="e.g. QA-GATE" required />
+    Text to find in gate name
+    <input name="findText" type="text" placeholder="e.g. Internal or Masapay Internal" required />
+  </label>
+
+  <label>
+    Replace with
+    <input name="replaceWith" type="text" placeholder="e.g. QA (leave empty to remove)" />
   </label>
 
   <label>
@@ -65,5 +70,5 @@
   </label>
 
   <button type="submit" data-default-action="true">Rename Gates</button>
-  <p class="tool-note">Applies changes in the currently active Clone Project table.</p>
+  <p class="tool-note">Replaces every match in each Gate name inside the Clone Project table. Rows without a match are skipped.</p>
 </form>

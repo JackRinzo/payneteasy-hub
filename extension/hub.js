@@ -121,8 +121,13 @@ async function executeActiveTool() {
     }
 
     if (typeof output === "object" && output.success) {
-      const countText = typeof output.count === "number" ? ` Updated rows: ${output.count}.` : "";
-      setStatus(`Completed successfully.${countText}`, "ok");
+      const parts = [];
+      if (typeof output.count === "number") parts.push(`updated: ${output.count}`);
+      if (typeof output.skipped === "number" && output.skipped > 0) {
+        parts.push(`skipped (no match): ${output.skipped}`);
+      }
+      const detailText = parts.length ? ` ${parts.join(", ")}.` : "";
+      setStatus(`Completed successfully.${detailText}`, "ok");
       return;
     }
 

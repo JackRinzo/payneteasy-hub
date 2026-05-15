@@ -5,7 +5,7 @@
       "id": "gate-renamer",
       "name": "Gate Renamer",
       "icon": "✏️",
-      "description": "Rename gates inside Clone Project modal",
+      "description": "Replace chosen text in gate names (Clone Project modal)",
       "script": "gate-renamer/tool.js",
       "ui": "gate-renamer/ui.html"
     },

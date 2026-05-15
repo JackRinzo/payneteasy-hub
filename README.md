@@ -58,7 +58,7 @@ const REGISTRY_URL = "https://YOUR_GITHUB_USERNAME.github.io/payneteasy-hub/tool
 
 ## Existing Tools
 
-- **Gate Renamer**: renames gate rows in Clone Project modal.
+- **Gate Renamer**: replaces chosen text in gate names inside Clone Project modal (all matches per row).
 - **Log Extractor**: extracts merchant or processor log blocks and downloads `.txt`.
 
 ## Add New Tool Later

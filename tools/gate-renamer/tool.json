@@ -3,7 +3,8 @@
   "name": "Gate Renamer",
   "description": "Rename gates inside Clone Project modal.",
   "params": [
-    { "key": "word", "type": "string", "required": true, "label": "Replacement first word" },
+    { "key": "findText", "type": "string", "required": true, "label": "Text to find in gate name" },
+    { "key": "replaceWith", "type": "string", "required": false, "label": "Replacement text" },
     { "key": "currency", "type": "string", "required": false, "label": "Optional 3-letter currency" }
   ]
 }
