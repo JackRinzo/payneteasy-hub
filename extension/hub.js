@@ -127,7 +127,7 @@ async function executeActiveTool() {
         parts.push(`skipped (no match): ${output.skipped}`);
       }
       const detailText = parts.length ? ` ${parts.join(", ")}.` : "";
-      setStatus(`Completed successfully.${detailText}`, "ok");
+      setStatus(output.count === 0 ? "No rows updated." : `Completed successfully.${detailText}`, output.count === 0 ? "error" : "ok");
       return;
     }
 
