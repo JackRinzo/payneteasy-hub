@@ -6,6 +6,7 @@
   "permissions": ["scripting", "activeTab", "downloads", "tabs"],
   "host_permissions": [
     "https://*.payneteasy.eu/*",
+    "https://*.dns-pay.com/*",
     "https://*.github.io/*"
   ],
   "action": {
